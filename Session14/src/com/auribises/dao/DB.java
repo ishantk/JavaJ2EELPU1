@@ -1,5 +1,6 @@
 package com.auribises.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,8 +15,10 @@ public class DB {
 	
 	// Connection is an Interface whose reference we have declared
 	Connection connection;
-	Statement statement;
-	PreparedStatement prepStmt;
+	Statement statement;		// to execute SQL Command in MySQL DB
+	PreparedStatement prepStmt; // to execute SQL Command in MySQL DB
+	
+	CallableStatement callStmt; // to execute StoredProcedure in MySQL DB
 	
 	// 1. Load the Driver
 	public DB() {
@@ -92,6 +95,60 @@ public class DB {
 		}
 		
 		return message;
+	}
+	
+	
+	public void executeProcedureInDB(Customer customer) {
+				
+		try {
+			String sql = "{ call addCustomer(?, ?, ?, ?, ?, ?) }";
+			
+			callStmt = connection.prepareCall(sql);
+			callStmt.setString(1, customer.name);
+			callStmt.setString(2, customer.phone);
+			callStmt.setString(3, customer.email);
+			callStmt.setFloat(4, (float) customer.temperature);
+			callStmt.setString(5, customer.entryDateTime);
+			callStmt.setString(6, customer.exitDateTime);
+			
+			callStmt.execute();
+			System.out.println("Procedure Executed :)");
+			
+		} catch (Exception e) {
+			System.out.println("Some Exception: "+e);
+		}		
+	}
+	
+	public void executeBatchTransaction() {
+		try {
+			
+			String sql1 = "update Customer set name='Fionna Flynn', email='fionna.flynn@example.com' where id = 2";
+			String sql2 = "delete from Customer where cid = 8";
+			
+			statement = connection.createStatement();
+			
+			connection.setAutoCommit(false); // we will manage our transaction :)
+			
+			// execute multiple SQL Statements all together i.e. in 1 single go :)
+			statement.addBatch(sql1);
+			statement.addBatch(sql2);
+			
+			statement.executeBatch();
+			connection.commit();  // ensuring that batch is executed like a transaction
+			
+			System.out.println("Batch Executed :)");
+			
+		} catch (Exception e) {
+			System.out.println("Some Exception: "+e);
+			
+			try {
+				System.out.println("ERROR OCCURRED AND TRANSACTION ROLLEDBACK");
+				connection.rollback();
+			} catch (Exception e2) {
+				System.out.println("Some Exception: "+e);
+			}
+			
+		}
 	}
 	
 	public String markExit(String exitDateTime, int customerId) {
@@ -210,6 +267,8 @@ public class DB {
 		return customers;
 	}
 
+	
+	
 	// 4. Close Connection with DataBase
 	public void closeConnection() {
 		try {

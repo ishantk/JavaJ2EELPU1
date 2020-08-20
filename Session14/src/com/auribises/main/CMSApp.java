@@ -28,6 +28,7 @@ public class CMSApp {
 			System.out.println("5. Delete Customer by ID");
 			System.out.println("5. Delete Customer by Phone");
 			System.out.println("6. See Customers with time spent > 30 mins");
+			System.out.println("7. Execute Batch");
 			System.out.println("0. Exit the App");
 			System.out.println("-----------------------------------------");
 			
@@ -71,8 +72,9 @@ public class CMSApp {
 					System.out.println("Would You Like to Add Customer "+cRef.name+" ? (yes/no)");
 					String save = scanner.nextLine();
 					if(save.equals("yes")) {
-						String message = db.addCustomer(cRef);
-						System.out.println(message);
+						//String message = db.addCustomer(cRef);
+						//System.out.println(message);
+						db.executeProcedureInDB(cRef);
 					}else {
 						System.out.println("Thank You For Using CMS App :)");
 					}
@@ -114,6 +116,10 @@ public class CMSApp {
 				case 6:
 						
 					break;
+					
+				case 7:
+					db.executeBatchTransaction();
+					break;	
 									
 				default:
 					System.out.println("Invalid Choice");
@@ -133,3 +139,4 @@ public class CMSApp {
 //			   Try Implementing more functionalities :)
 //			   Statistics of how many customers came on a particular day :)
 //			   How many customers available in some date time range ?
+//			   Explore MetaData in JDBC :)
