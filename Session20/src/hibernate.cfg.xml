@@ -26,8 +26,8 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
 
-        <!-- <mapping resource="restaurant.hbm.xml"/> -->
-        <mapping class="com.auribises.model.Restaurant"/> 
+        <!-- <mapping resource="restaurant.hbm.xml"/>  -->
+        <mapping class="com.auribises.model.Restaurant"/>
 
     </session-factory>
 

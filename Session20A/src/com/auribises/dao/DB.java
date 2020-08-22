@@ -61,42 +61,6 @@ public class DB {
 		
 	}
 	
-	public void fetchSingleObject(Integer id) {
-		Restaurant restaurant = session.get(Restaurant.class, id);
-		System.out.println(restaurant);
-		restaurant.showRestaurant();
-	}
-	
-	public void fetchAllObjects() {
-		//String hql = "From Restaurant";
-		//String hql = "From Restaurant where ratings > 4.8";
-		
-		//List<Restaurant> restaurants = session.createQuery(hql).list();
-		
-		// Explore new API against createCriteria here :)
-		Criteria criteria = session.createCriteria(Restaurant.class);
-		criteria.add(Restrictions.gt("ratings", 4.8));
-		
-		List<Restaurant> restaurants = criteria.list();
-		
-		// Iterate in List of Restaurants
-		restaurants.forEach((restaurant) -> restaurant.showRestaurant());
-		
-	}
-	
-	public void updateObject(Restaurant object) {
-		transaction.begin();
-		session.update(object);
-		transaction.commit();
-		System.out.println("Object Updated in DataBase");
-	}
-	
-	public void deleteObject(Restaurant object) {
-		transaction.begin();
-		session.delete(object);
-		transaction.commit();
-		System.out.println("Object Deleted From DataBase");
-	}
 	
 	public void close() {
 		session.close();

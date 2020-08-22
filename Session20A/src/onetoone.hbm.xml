@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   
+   <class name="com.auribises.model.Restaurant" table="RESTAURANTS">
+      
+      <id name="rid" column="RID">
+         <generator class="increment"/>
+      </id>
+      <property name="name" column="NAME" />
+      <property name="phone" column="PHONE"/>
+      <property name="address" column="ADDRESS"/>
+      <property name="ratings" column="RATINGS"/>
+      
+      <one-to-one name="manager" class="com.auribises.model.Manager" cascade="all"/>
+      
+   </class>
+   
+   <class name="com.auribises.model.Manager" table="MANAGERS">
+      
+      <id name="mid" column="MID">
+         <generator class="foreign">
+         	<param name="property">restaurant</param>
+         </generator>
+      </id>
+      <property name="name" column="NAME" />
+      <property name="phone" column="PHONE"/>
+      <property name="email" column="ADDRESS"/>
+      
+      <one-to-one name="restaurant" class="com.auribises.model.Restaurant" cascade="all" constrained="true"/>
+      
+   </class>
+   
+</hibernate-mapping>

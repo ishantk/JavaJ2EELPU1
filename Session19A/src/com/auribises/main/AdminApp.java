@@ -31,7 +31,7 @@ public class AdminApp {
 	public static void main(String[] args) {
 		
 
-		Restaurant restaurant1 = new Restaurant(null, "Hot Breads", "+91 99876 99876", "Sarabha Nagar", "Veg", 4.98, "10:00 to 20:00");
+		/*Restaurant restaurant1 = new Restaurant(null, "Hot Breads", "+91 99876 99876", "Sarabha Nagar", "Veg", 4.98, "10:00 to 20:00");
 		
 		Restaurant restaurant2 = new Restaurant();
 		restaurant2.setRid(null);
@@ -43,10 +43,24 @@ public class AdminApp {
 		restaurant2.setOperatingHours("10:00 to 24:00");
 		
 		System.out.println(restaurant1);
-		System.out.println(restaurant2);
+		System.out.println(restaurant2);*/
 	
 		DB db = new DB();
-		db.saveObject(restaurant1);
+		
+		//db.saveObject(restaurant1);
+		//db.saveObject(restaurant2);
+		
+		//db.fetchSingleObject(1);
+		//db.fetchAllObjects();
+		
+		//Restaurant restaurant = new Restaurant(1, "Hot Breads", "+91 99999 33333", "Mall Road", "Veg-NonVeg", 4.2, "10:00 to 22:00");
+		//db.updateObject(restaurant);
+		
+		//Restaurant restaurant = new Restaurant();
+		//restaurant.setRid(5);
+		
+		//db.deleteObject(restaurant);
+		
 		db.close();
 		
 	}
