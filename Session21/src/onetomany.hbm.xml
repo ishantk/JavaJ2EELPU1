@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   
+   <class name="com.auribises.model.Restaurant" table="RESTAURANTS">
+      
+      <id name="rid" column="RID">
+         <generator class="increment"/>
+      </id>
+      <property name="name" column="NAME"/>
+      <property name="type" column="TYPE"/>
+      <property name="ratings" column="RATINGS"/>
+      <property name="operatingHours" column="OPERATINGHOURS"/>
+      
+      <list name="items" cascade="all">  <!-- cascade="all" - With Restaurant Object, FoodItems Objects will also be saved --> 
+       	<key column="RID"/> 		<!-- RID is a column, which will be created in FOODITEMS Table. restaurant id to which food item belongs -->
+      	<list-index column="idx"/>	<!-- idx is another column, which FOODITEMS. it will maintain index of the food item in the list -->
+      	<one-to-many class="com.auribises.model.FoodItem"/>
+      </list>
+      
+   </class>
+   
+   <class name="com.auribises.model.FoodItem" table="FOODITEMS">
+      
+      <id name="itemCode" column="ITEMCODE">
+         <generator class="increment"/>
+      </id>
+      <property name="name" column="NAME"/>
+      <property name="price" column="PRICE"/>
+      
+   </class>
+   
+</hibernate-mapping>
