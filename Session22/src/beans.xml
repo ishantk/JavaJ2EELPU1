@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    
+   <!-- <bean id="con1" class="com.auribises.beans.Connection" scope="singleton"> --> <!-- by default scope is singleton -->
+   <!-- <bean id="con1" class="com.auribises.beans.Connection" scope="prototype"> -->
+   <bean id="con1" class="com.auribises.beans.Connection" init-method="myInit" destroy-method="myDestroy">
+       <property name="url" value="jdbc:mysql://localhost/mydb"/>
+       <property name="user" value="root"/>
+       <property name="password" value="pass123"/>
+   </bean>
+   
+    <bean class="com.auribises.beans.PostProcessor"/>
+   
+   <bean id="con2" class="com.auribises.beans.Connection">
+       <property name="url" value="mongod://cluster0.zbc.xyz.com"/>
+       <property name="user" value="atpl"/>
+       <property name="password" value="atpl123"/>
+   </bean>
+
+</beans>

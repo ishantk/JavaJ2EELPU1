@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+     
+   
+   <bean id="item1" class="com.auribises.beans.FoodItem">
+       <property name="name" value="Veggie Burger"/>
+       <property name="price" value="100"/>
+   </bean>
+   
+   <bean id="rest1" class="com.auribises.beans.Restaurant">
+       <property name="name" value="Johns Cafe"/>
+       <property name="phone" value="+91 99999 11111"/>
+       <property name="address" value="Redwood Shores"/>
+       <!-- Constructor Injection - Create Object of Restaurant by passing FoodItem Object in Constructor -->
+       <!-- <constructor-arg ref="item1"/> -->
+       
+       <!-- Setter Injection - Create Object of Restaurant with default constructor and use Setter for linking FoodItem with Restaurant-->
+       <property name="item" ref="item1"/>
+       
+       <property name="departments">
+       	<list>
+       		<value>Admin</value>
+       		<value>Accounts</value>
+       		<value>HR</value>
+       		<value>Sales</value>
+       		<value>Marketing</value>
+       	</list>
+       	
+       	<!-- 
+	       	Explore the tags below:
+	       	<map></map>
+	       	<set></set>
+	       	<array></array> 
+       	-->
+       </property>
+       
+   </bean>
+
+</beans>
