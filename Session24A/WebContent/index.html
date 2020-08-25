@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Restaurants</title>
+
+<script type="text/javascript">
+
+	var request;
+	
+	function searchRequest(){
+		var name = document.searchForm.txtSearch.value;
+		var url = "search.jsp?name="+name;
+		
+		request = new XMLHttpRequest();
+		
+		try{
+			request.onreadystatechange = searchResponse;
+			request.open("GET", url, true); // send the request asynchronusly
+			request.send();
+		}catch(e){
+			alert("Something went wrog");
+		}
+	}
+	
+	function searchResponse(){
+		if(request.readyState == 4){ // 4 means, we have received response 
+			var res = request.responseText;
+			document.getElementById("data").innerHTML = res;
+		}
+	}
+
+
+</script>
+
+</head>
+<body>
+
+	<center>
+	<br/><br/><br/>
+	
+		<h3>SEARCH</h3>
+		
+		<form name="searchForm">
+			<input type="text" placeholder="eg: Gopal" name="txtSearch" onkeyup="searchRequest()"/>
+		</form>
+		
+		<br/>
+		<h4>Restaurants:</h4>
+		<span id="data">
+		
+		</span>
+		
+	</center>
+
+</body>
+</html>

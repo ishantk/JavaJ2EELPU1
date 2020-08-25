@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    
+   <!-- <bean id="mgr" class="com.auribises.beans.Manager"> -->
+   <bean id="manager" class="com.auribises.beans.Manager">
+       <property name="name" value="Fionna Flynn"/>
+       <property name="phone" value="+91 99999 11111"/>
+       <property name="salary" value="50000"/>
+   </bean> 
+    
+   <bean id="restaurant" class="com.auribises.beans.Restaurant">
+       <property name="name" value="Ben's Cafe"/>
+       <property name="phone" value="+91 90909 80808"/>
+       <property name="address" value="Redwood Shores"/>
+       <property name="ratings" value="4.5"/>
+       <property name="operatingHours" value="10:00 to 20:00"/>
+       <!-- <constructor-arg ref="mgr"/> --> <!-- Constructor Injection -->
+       <!-- <property name="manager" ref="mgr"/> -->  <!-- Setter Injection -->
+   </bean>
+
+	<!-- The below tag enables us to use annotations in our java file for managing dependency -->
+	<!-- Enabling Auto-Wiring Feature -->
+	<context:annotation-config/>
+
+</beans>
